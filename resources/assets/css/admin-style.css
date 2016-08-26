@@ -1,0 +1,67 @@
+body {
+	background-color: #f1f1f1;
+}
+
+.bootstrap-switch {
+	display: block;
+	margin-bottom: 20px;
+}
+
+/* Optional Wrapper to help with Responsive Designs */
+ .select2-wrapper {
+    width: 300px;
+}
+/* Optional styling to the right */
+ .select2-results .fa {
+    float: right;
+    position: relative;
+    line-height: 20px;
+}
+
+[data-password="strong-password"] {
+	width: 100%;
+}
+
+[type="password"] {
+	width: 100%;
+}
+
+[data-password-button="strong-password"] {
+    display: block;
+    float: right;
+}
+
+.strength_meter, [data-meter="strong-password"] {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.select2-dropdown {
+  z-index: 9001;
+}
+
+.remodal-is-opened {
+    z-index: 100;
+}
+
+span.select2-container.select2-container--default.select2-container--open {
+	z-index: 10001;
+}
+
+.input-group-addon {
+    padding: 2px 0px;
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+#users.panel-body, #credentials.panel-body {
+    padding: 0px;
+}
+
+.form-group.has-error > .btn-group > .btn, .form-group.has-error .select2-container--default, .form-group.has-error .select2-selection--multiple {
+    border-color: #a94442;
+    /*border: ;*/
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}

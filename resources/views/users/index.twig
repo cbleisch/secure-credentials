@@ -1,0 +1,61 @@
+<main id="content" role="main">
+    <div class="container-fluid wrap">
+        <div class="page-header">
+            <h1><i class="fa fa-users"></i> Users</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3>Active Users <a class="btn btn-default pull-right" id="users-modal-toggle"><i class="fa fa-plus"></i></a></h3>
+                    </div>
+                    <img src="{{ loading_url }}" width="50px" height="50px" class="loading" style="display: none">
+                    <div class="panel-body" id="users">
+                        <table class="table table-bordered table-responsive">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            <tbody id="users-body">
+                                {% if users %}
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                {{ user.first_name }}
+                                            </td>
+                                            <td>
+                                                {{ user.last_name }}
+                                            </td>
+                                            <td>
+                                                {{ user.email }}
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-default btn-xs credential-modal-toggle" href="/SecureCredentials/userCredentials/{{user.id}}/get"><i class="fa fa-key fa-rotate-90" data-toggle="tooltip" data-placement="top" title="associated credentials"></i></a>
+                                                <a class="btn btn-primary btn-xs edit-modal-toggle" href="/SecureCredentials/userEdit/{{user.id}}/get"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="edit"></i></a>
+                                                <a class="btn btn-danger btn-xs delete-modal-toggle" href="/SecureCredentials/userDelete/{{user.id}}/get"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="delete"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="remodal" data-remodal-id="remodal-modal" id="users-modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h1><i class="fa fa-user"></i></h1>
+  <form method="post" id="users-form" class="needs-validation">
+      <div id="modal-content">
+      </div>
+      <br>
+      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+  </form>
+</div>

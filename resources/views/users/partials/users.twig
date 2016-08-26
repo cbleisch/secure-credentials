@@ -1,0 +1,20 @@
+{% if users %}
+    {% for user in users %}
+        <tr>
+            <td>
+                {{ user.first_name }}
+            </td>
+            <td>
+                {{ user.last_name }}
+            </td>
+            <td>
+                {{ user.email }}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-xs credential-modal-toggle" href="/SecureCredentials/userCredentials/{{user.id}}/get"><i class="fa fa-key fa-rotate-90" data-toggle="tooltip" data-placement="top" title="associated credentials"></i></a>
+                <a class="btn btn-primary btn-xs edit-modal-toggle" href="/SecureCredentials/userEdit/{{user.id}}/get"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="edit"></i></a>
+                <a class="btn btn-danger btn-xs delete-modal-toggle" href="/SecureCredentials/userDelete/{{user.id}}/get"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="delete"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endif %}
