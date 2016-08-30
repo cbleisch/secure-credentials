@@ -1,14 +1,6 @@
-Herbert
+Secure Credentials for WordPress
 ===============
 
-Welcome to Herbert. Please check out the docs [here](http://getherbert.com/).
+Secure Credentials is a WordPress plugin for sharing account information with other users.
 
-Check out the example plugin [here](https://github.com/getherbert/example-plugin).
-
-You can find a full plugin built in Herbert [here](https://github.com/bigbitecreative/wordpress-socializr).
-
----
-If you are looking for the old version, you can find it here: https://github.com/getherbert/herbert/tree/pre
-And the docs for that version: http://getherbert.com/pre
-
-
+Instead of sending account information (usernames and passwords) over unsecured methods like email use Secure Credentials and share a link to the records instead. Add users who control who can see the records you've created, and set an expiration date on records to ensure that they don't hang around too long.
