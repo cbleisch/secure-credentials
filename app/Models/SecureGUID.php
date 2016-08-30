@@ -3,11 +3,7 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class SecureGUID extends Eloquent {
-    // protected $fillable = ['first_name', 'last_name', 'email'];
-    // public $timestamps = false;
-
-    // protected $table = 'sc_secure_users';
-
+    
     /*
      * 
      */

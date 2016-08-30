@@ -10,7 +10,22 @@
                     <div class="panel-body">
                         <p>Secure Credentials is a plugin developed for those looking for a secure way to share credentials with users.</p>
                         <p>Instead of sending user credentials over an unsecure medium (ie email, phone call, a text) use Secure Credentials to generate secure, unique credential retrieval pages.  Simple share this URL with your pre-selected users and they'll be able to access the records with their email address.</p>
-                        <p>Expiration</p>
+                        <p>
+                            Secure Credentials runs a job hourly to remove any expired credentials.
+                            When a user attempts to retrieve a credential several checks are in place:
+                            <ol>
+                                <li>Ensure the credential exists,</li>
+                                <li>Ensure the URL token matches the credential's token,</li>
+                                <li>Ensure the credential has not expired,</li>
+                                <li>Ensure the user has proper access to the credential.</li>
+                            </ol>
+                            If any one of these conditions fail the user is denied access to the credential.
+                            </p>
+                            <p>
+                                <strong>TROUBLESHOOTING</strong>
+                                <p>If you just installed Secure Credentials and see 404 Errors when attempting to add your first user it is likely because you do not have Permalinks enabled.<p>
+                              <p>Secure Credentials was coded with the <u>Post name</u> permalink option in mind. Secure Credentials does not work with the <u>Plain</u> permalink option.</p>
+                            </p>
                     </div>
                 </div>
             </div>
