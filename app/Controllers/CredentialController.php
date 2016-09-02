@@ -41,9 +41,13 @@ class CredentialController {
     }
 
     public function store(Http $http) {
-    	$expiration = Carbon::now()->addHours($http->get('expiration'));
+        // var_dump($http);
+        // die;
+        $current_user = wp_get_current_user();
+        $expiration = Carbon::now()->addHours($http->get('expiration'));
         $guid = new SecureGUID;
         $getSalty = wp_salt('secure_auth');
+
 
         $iv = mcrypt_create_iv(
             mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC),
@@ -75,6 +79,13 @@ class CredentialController {
         $credential->username = $http->get('username');
         $credential->password = $encrypted;
         $credential->expiration = $expiration->timestamp;
+
+        if(empty($http->get('notify_when_accessed'))) {
+            $credential->notify_when_accessed = 0;
+        } else {
+            $credential->notify_when_accessed = $http->get('notify_when_accessed');
+        }
+        $credential->email_to_notify = $current_user->user_email;
         $credential->save();
         $credential->users()->sync($http->get('users'));
     }
@@ -115,6 +126,9 @@ class CredentialController {
         $email = $http->get('email');
         
         if($credential && $http->get('token') == $credential->token && $credential->hasAccess($email)) {
+            if($credential->notify_when_accessed > 0) {
+                $credential->emailCreator($email);
+            }
             return view('@SecureCredentials/frontend/credential.twig', ['credential' => $credential]);
         } else {
             return view('@SecureCredentials/frontend/404.twig');

@@ -15,6 +15,10 @@ class SecureCredential extends Eloquent {
         return $this->belongsToMany('SecureCredentials\Models\SecureUser', 'sc_secure_credential_users', 'secure_credential_id', 'secure_user_id');
     }
 
+    public function user() {
+        return $this->belongsTo('SecureCredentials\Models\SercureUser');
+    }
+
     /*
      * The users with access to credentials
      */
@@ -30,7 +34,7 @@ class SecureCredential extends Eloquent {
     }
     
     /*
-     * hash and salt the provided password for encryption
+     * Hash and salt the provided password for encryption
      */
     public function getSensitive() {
         $getSalty = wp_salt('secure_auth');
@@ -48,5 +52,51 @@ class SecureCredential extends Eloquent {
             "\0"
         );
         return $decrypted;
+    }
+
+    /*
+     * Email 
+     */
+    public function emailCreator($emailOfUser) {
+        // Send and HTML styled email
+        // add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+        
+        // Get important info for headers
+        $senderEmail = get_bloginfo('admin_email');
+        $siteName = get_bloginfo('name');
+        $domain = $_SERVER['HTTP_HOST'];
+
+        // Email parts
+        $to = $this->email_to_notify;
+        $headers[] = "From: $siteName <$senderEmail>";
+        $headers[] = "Reply-to: $siteName <no-reply@$domain>";
+        $headers[] = "Content-Type: text/html; charset=UTF-8";
+        $subject = $this->title . " was accessed";
+        $creator = get_user_by('email', $to);
+
+        $greeting = "Howdy ";
+        if(!$creator->user_nicename) {
+            $greeting .= "$creator->first_name $creator->last_name,";
+        } else {
+            $greeting .= "$creator->user_nicename,";
+        }
+
+        $message = "<h2>$greeting</h2>
+        <p>
+        $emailOfUser just accessed $this->title.
+        </p>
+        <p>
+        Thought you &#39;ought to know.
+        </p>
+        <p>
+            <i>&#126; Team $siteName</i>
+        </p>
+        ";
+
+        // Send the email
+        wp_mail( $to, $subject, $message, $headers );
+        
+        // Avoid conflicts
+        // remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
     }
 }
