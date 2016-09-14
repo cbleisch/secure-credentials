@@ -81,9 +81,7 @@ class UserController {
     public function credentialsModal($id) {
         $user = SecureUser::find($id);
         $credentials = $user->credentials()->get();
-        // var_dump($credentials);
-        // die;
-        return view('@SecureCredentials/users/partials/credentials.twig', ['user' => $user, 'credentials' => $credentials]);
+        return view('@SecureCredentials/users/partials/credentials.twig', ['user' => $user, 'credentials' => $credentials, 'domain' => $_SERVER['HTTP_HOST']]);
     }
 
     public function revokeCredentialAccess($user_id, $credential_id) {

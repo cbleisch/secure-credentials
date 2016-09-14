@@ -41,13 +41,10 @@ class CredentialController {
     }
 
     public function store(Http $http) {
-        // var_dump($http);
-        // die;
         $current_user = wp_get_current_user();
         $expiration = Carbon::now()->addHours($http->get('expiration'));
         $guid = new SecureGUID;
         $getSalty = wp_salt('secure_auth');
-
 
         $iv = mcrypt_create_iv(
             mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC),
@@ -78,6 +75,8 @@ class CredentialController {
         $credential->title = $http->get('title');
         $credential->username = $http->get('username');
         $credential->password = $encrypted;
+        $credential->login_url = $http->get('login_url');
+        $credential->notes = $http->get('notes');
         $credential->expiration = $expiration->timestamp;
 
         if(empty($http->get('notify_when_accessed'))) {

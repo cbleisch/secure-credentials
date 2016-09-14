@@ -20,9 +20,11 @@ Capsule::schema()->create('sc_secure_credentials', function($table)
     $table->string('username');
     $table->string('password');
     $table->bigInteger('expiration');
-    $table->string('token');
+    $table->string('login_url');
+    $table->string('notes');
     $table->boolean('notify_when_accessed');
     $table->string('email_to_notify');
+    $table->string('token');
 });
 
 Capsule::schema()->create('sc_secure_users', function($table)
