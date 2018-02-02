@@ -63,6 +63,9 @@ class UserController {
         $user->save();
     }
 
+    /*
+     * Delete a single user via ajax
+     */
     public function delete(Http $http) {
         $user = SecureUser::find($http->get('id'));
         $user->credentials()->detach();
@@ -73,17 +76,26 @@ class UserController {
         }
     }
 
+    /*
+     * Return all $users
+     */
     public function getUsers() {
         $users = SecureUser::all();
         return view('@SecureCredentials/users/partials/users.twig', ['users' => $users]);
     }
 
+    /*
+     * Display modal with all $credentials a $user has access to via ajax
+     */
     public function credentialsModal($id) {
         $user = SecureUser::find($id);
         $credentials = $user->credentials()->get();
         return view('@SecureCredentials/users/partials/credentials.twig', ['user' => $user, 'credentials' => $credentials, 'domain' => $_SERVER['HTTP_HOST']]);
     }
 
+    /*
+     * Remove a $users access to a $credential
+     */
     public function revokeCredentialAccess($user_id, $credential_id) {
         $user = SecureUser::find($user_id);
         $user->credentials()->detach($credential_id);

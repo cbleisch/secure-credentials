@@ -12,6 +12,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 Capsule::schema()->dropIfExists('sc_secure_users');
 Capsule::schema()->dropIfExists('sc_secure_credentials');
+Capsule::schema()->dropIfExists('sc_secure_pins');
 Capsule::schema()->dropIfExists('sc_secure_credential_users');
 
 wp_clear_scheduled_hook('remove_credentials');

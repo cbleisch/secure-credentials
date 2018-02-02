@@ -54,6 +54,10 @@ $router->get([
 ]);
 
 /*
+ * END User Routes
+ */
+
+/*
  * Credential Routes
  */
 $router->get([
@@ -87,6 +91,12 @@ $router->post([
     'uses' => __NAMESPACE__ . '\Controllers\CredentialController@validateEmailAndToken'
 ]);
 
+$router->post([
+    'as'   => 'validateAuthCode',
+    'uri'  => '/SecureCredentials/auth',
+    'uses' => __NAMESPACE__ . '\Controllers\CredentialController@validateAuthCode'
+]);
+
 $router->get([
     'as'   => 'getCredentialDelete',
     'uri'  => '/SecureCredentials/credentialDelete/{id}/get',
@@ -116,3 +126,7 @@ $router->post([
     'uri'  => '/SecureCredentials/revokeAccess/{user_id}/{credential_id}/post',
     'uses' => __NAMESPACE__ . '\Controllers\UserController@revokeCredentialAccess'
 ]);
+
+/*
+ * END Credential Routes
+ */

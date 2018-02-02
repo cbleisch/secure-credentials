@@ -2,6 +2,11 @@ body {
 	background-color: #f1f1f1;
 }
 
+.loading {
+    display: block;
+    margin: 0 auto;
+}
+
 .bootstrap-switch {
 	display: block;
 	margin-bottom: 20px;

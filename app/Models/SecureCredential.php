@@ -58,7 +58,7 @@ class SecureCredential extends Eloquent {
      * Email 
      */
     public function emailCreator($emailOfUser) {
-        // Send and HTML styled email
+        // Send an HTML styled email
         // add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
         
         // Get important info for headers

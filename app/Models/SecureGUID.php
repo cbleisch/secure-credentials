@@ -5,7 +5,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class SecureGUID extends Eloquent {
     
     /*
-     * 
+     * Fuction: randomized number for 
+     * secure credential url creation 
+     * returns: integer
      */
     function getGUID() {
 	    if (function_exists('com_create_guid')){
